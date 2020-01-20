@@ -8,16 +8,16 @@
 <body>
 	<div class="container">
 		<div class="baner"><h1>W naszym sklepie internetowym kupisz najtaniej</h1></div>
-		<div class="lewy"><h3>Promocja 15% obejmuje arrtykuly:</h3>
+		<div class="lewy"><h3>Promocja 15% obejmuje artykuły:</h3>
 		<?php
 	
 	$conn = mysqli_connect("localhost", "root", "", "sklep");
 	mysqli_set_charset($conn, "utf8");
 	
 	//$tow = $_POST["tow"];
-	$q1 = "SELECT nazwa FROM towary WHERE promocja=1";
+	$q = "SELECT nazwa FROM towary WHERE promocja=1";
 	//$q2 = "SELECT cena FROM towary WHERE  nazwa='cienkopis'";
-	$result = mysqli_query($conn, $q1);
+	$result = mysqli_query($conn, $q);
 		echo "<ul>";
 	while($row = mysqli_fetch_row($result))
 	{
@@ -31,7 +31,7 @@
 	
 	?>
 		</div>
-		<div class="srodkowy"><h3>Cena wybranego artykulu w promocji</h3>
+		<div class="srodkowy"><h3>Cena wybranego artykułu w promocji</h3>
 		<form action="index.php" method="post">
 
 		
@@ -39,38 +39,31 @@
 			
 	
 	//$tow = $_POST["tow"];
-	$q2 = "SELECT nazwa FROM towary WHERE promocja=1";
+	$q = "SELECT nazwa FROM towary WHERE promocja=1";
 	//$q2 = "SELECT cena FROM towary WHERE promocja=1";
-	$result2 = mysqli_query($conn, $q2);
+	$result = mysqli_query($conn, $q);
 			
 			
 			
 			echo '<select name="tow">';
 			
-	while($row2 = mysqli_fetch_row($result2))
+	while($row = mysqli_fetch_row($result))
 	{
-		echo "<option>".$row2[0]."</option><br>";
+		echo "<option>".$row[0]."</option><br>";
 	}
 		echo "</select>";
 		
 		
-		
-		
-		
-			
-			
-		
-	
-				
 			$tow = $_POST["tow"];
-			$q3 = "SELECT nazwa, cena FROM towary WHERE nazwa='$tow'";
+			$q = "SELECT nazwa, cena FROM towary WHERE nazwa='$tow'";
 
-			$result3 = mysqli_query($conn, $q3);
+			$result = mysqli_query($conn, $q);
 			
 			//echo ;
 			echo "<button>Wybiez</button>";
-			while($cena = mysqli_fetch_row($result3))
-			{ echo '<br>'.$cena[0]."  ";
+			while($cena = mysqli_fetch_row($result))
+			{ 
+				echo '<br><br>'.$cena[0]."  ";
 				echo round($cena[1]/100*85, 2)." "."zl";
 			
 							
@@ -80,7 +73,7 @@
 		
 			
 		
-echo '</form>';
+	echo '</form>';
 	
 		
 	mysqli_close($conn);
